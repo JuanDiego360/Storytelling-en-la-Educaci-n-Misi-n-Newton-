@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Vuelo: Misión Newton</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        @page {
+            size: 1280px 720px;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #050a14;
+            font-family: 'Rajdhani', sans-serif;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 0;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background: radial-gradient(circle at center, #0b1930 0%, #050a14 100%);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 60px;
+            box-shadow: 0 0 50px rgba(0, 180, 216, 0.2);
+            border: 1px solid #1a3a5a;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* Efecto de rejilla futurista */
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(0, 180, 216, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 180, 216, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #00b4d8;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00b4d8;
+            font-size: 32px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .mission-tag {
+            background: rgba(0, 180, 216, 0.1);
+            border: 1px solid #00b4d8;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #90e0ef;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            z-index: 1;
+            height: 100%;
+        }
+
+        .column-left {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-panel {
+            background: rgba(10, 25, 47, 0.7);
+            border-left: 4px solid #fb8500;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-panel h3 {
+            margin: 0 0 10px 0;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            color: #fb8500;
+        }
+
+        .info-panel p {
+            margin: 0;
+            font-size: 18px;
+            line-height: 1.3;
+        }
+
+        .story-arc {
+            background: rgba(0, 180, 216, 0.05);
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .arc-item {
+            display: flex;
+            gap: 15px;
+        }
+
+        .arc-icon {
+            width: 40px;
+            height: 40px;
+            background: #00b4d8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #050a14;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        .arc-content h4 {
+            margin: 0 0 5px 0;
+            color: #90e0ef;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+        }
+
+        .arc-content p {
+            margin: 0;
+            font-size: 16px;
+            color: #ccc;
+        }
+
+        .tech-footer {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            font-size: 14px;
+            border-top: 1px solid #1a3a5a;
+        }
+
+        .tech-item i {
+            color: #fb8500;
+            margin-right: 8px;
+        }
+
+        .footer-page {
+            position: absolute;
+            bottom: 20px;
+            right: 40px;
+            font-size: 12px;
+            color: #444;
+            font-family: 'Orbitron';
+        }
+
+        .launch-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background: #fb8500;
+            color: #050a14;
+            padding: 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #fb8500;
+            box-shadow: 0 4px 15px rgba(251, 133, 0, 0.3);
+            margin-top: 10px;
+        }
+
+        .launch-btn:hover {
+            background: transparent;
+            color: #fb8500;
+            box-shadow: 0 0 25px rgba(251, 133, 0, 0.5);
+            transform: scale(1.02);
+        }
+
+        .launch-btn i {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .launch-btn:hover i {
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="slide">
+        <div class="header">
+            <h1>Bitácora: Estación Equilibrio</h1>
+            <div class="mission-tag">CÓDIGO: LEYES-NEWTON</div>
+        </div>
+
+        <div class="main-grid">
+            <div class="column-left">
+                <div class="info-panel">
+                    <h3>TÍTULO CREATIVO</h3>
+                    <p>¡Atención, Cadete de Newton! Misión Cinturón de Silencio</p>
+                </div>
+                <div class="info-panel" style="border-left-color: #00b4d8;">
+                    <h3>POBLACIÓN</h3>
+                    <p>Estudiantes de Física (Cadetes en formación)</p>
+                </div>
+                <div class="info-panel" style="border-left-color: #90e0ef;">
+                    <h3>METAS DE APRENDIZAJE</h3>
+                    <p>Dominar las Leyes de Newton como herramientas de supervivencia y resolución de conflictos
+                        espaciales.</p>
+                </div>
+                <div class="info-panel" style="border-left-color: #ffb703; background: rgba(251, 133, 0, 0.05);">
+                    <h3>EXPLORACIÓN INTERACTIVA</h3>
+                    <a href="https://view.genially.com/696080926a77ef7822a756bc/interactive-content-estacion-espacial-equilibrio"
+                        target="_blank" class="launch-btn">
+                        <span>Lanzar Storytelling</span>
+                        <i class="fa-solid fa-rocket"></i>
+                    </a>
+                </div>
+                <div style="text-align: center; margin-top: 15px;">
+                    <i class="fa-solid fa-user-astronaut" style="font-size: 60px; color: rgba(0, 180, 216, 0.2);"></i>
+                </div>
+            </div>
+
+            <div class="story-arc">
+                <h3 style="font-family: 'Orbitron'; color: #00b4d8; margin: 0;">ESTRUCTURA NARRATIVA</h3>
+
+                <div class="arc-item">
+                    <div class="arc-icon">1</div>
+                    <div class="arc-content">
+                        <h4>INICIO: El Cargamento a la Deriva</h4>
+                        <p>El radar detecta suministros alejándose a 50m/s. ¿Por qué no se detienen? El cadete debe
+                            aplicar la <strong>Inercia</strong> para interceptarlos.</p>
+                    </div>
+                </div>
+
+                <div class="arc-item">
+                    <div class="arc-icon">2</div>
+                    <div class="arc-content">
+                        <h4>NUDO: La Decisión de Fuerza</h4>
+                        <p>Frenar 10 toneladas con poco combustible. ¿Nave Centella o Titán? El éxito depende del
+                            cálculo exacto de la <strong>Segunda Ley (F=m·a)</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="arc-item">
+                    <div class="arc-icon">3</div>
+                    <div class="arc-content">
+                        <h4>DESENLACE: El Último Impulso</h4>
+                        <p>Cable de seguridad roto. Solo una caja de herramientas para volver. Aplicación vital de la
+                            <strong>Acción y Reacción</strong> para no perderse en el vacío.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="tech-footer">
+                    <div class="tech-item"><i class="fa-solid fa-microchip"></i> <strong>HERRAMIENTAS:</strong> Stop
+                        Motion / Narración Digital</div>
+                    <div class="tech-item"><i class="fa-solid fa-volume-high"></i> <strong>SONIDO:</strong> Ambiente
+                        Espacial / Alarmas</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-page">EXP. FINAL - JUAN DIEGO FLOREZ</div>
+    </div>
+
+</body>
+
+</html>
